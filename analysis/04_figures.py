@@ -1,6 +1,8 @@
 """Figures 1, 2, 3 for Raz (2025) replication.
 
-Figure 1: County-level SHI map (CONUS).
+Figure 1: County-level SHI map after partialling out state fixed effects
+          (matches paper main Figure 1, p.8). Raw SHI is also saved as
+          figureA1_shi_raw_map.png (matches paper Appendix Figure A.1).
 Figure 2: County-level LNI map 1940 (requires IPUMS-derived LNI column).
 Figure 3: DiD event study β_b (requires linked MigrantsNative_2.csv).
 
@@ -21,9 +23,17 @@ from _common import FIGS, load_panel
 def fig1_shi_map() -> None:
     import geopandas as gpd
     panel = load_panel()
-    shi = panel[["gisjoin", "shi"]].drop_duplicates("gisjoin")
+    shi = (
+        panel[["gisjoin", "state", "shi"]]
+        .drop_duplicates("gisjoin")
+        .dropna(subset=["shi", "state"])
+    )
 
-    # Look for the county parquet cache one directory up from delivery
+    # Residualise SHI on state fixed effects to match paper's main Figure 1
+    # (p.8, fn.5: the underlying soil surveys tend to vary by state).
+    state_means = shi.groupby("state")["shi"].transform("mean")
+    shi["shi_resid"] = shi["shi"] - state_means
+
     cand = [
         Path(
             "/Users/ab180/Desktop/Coursework/Semester2/BZD6004/Group/final/"
@@ -39,19 +49,46 @@ def fig1_shi_map() -> None:
     gdf = county.merge(shi, left_on="GISJOIN", right_on="gisjoin", how="left")
     gdf = gdf.cx[-2.5e6:2.5e6, -2e6:3.5e6]
 
+    vmax = float(np.nanmax(np.abs(gdf["shi_resid"].to_numpy())))
     fig, ax = plt.subplots(figsize=(12, 7))
     gdf.plot(
-        column="shi", cmap="viridis", linewidth=0.1,
-        edgecolor="white", legend=True,
-        legend_kwds={"label": "Soil Heterogeneity Index (1 − HHI)", "shrink": 0.6},
+        column="shi_resid", cmap="RdBu_r", vmin=-vmax, vmax=vmax,
+        linewidth=0.1, edgecolor="white", legend=True,
+        legend_kwds={
+            "label": "SHI (residual after state FE)",
+            "shrink": 0.6,
+        },
         ax=ax, missing_kwds={"color": "#eeeeee"},
     )
-    ax.set_title("Figure 1: County-level Soil Heterogeneity Index — CONUS", fontsize=13)
+    ax.set_title(
+        "Figure 1: County-level Soil Heterogeneity Index — CONUS\n"
+        "(after partialling out state fixed effects, cf. Raz 2025 Fig. 1)",
+        fontsize=12,
+    )
     ax.set_axis_off()
     fig.tight_layout()
     fig.savefig(FIGS / "figure1_shi_map.png", dpi=180, bbox_inches="tight")
     plt.close(fig)
-    print("  saved figure1_shi_map.png")
+    print("  saved figure1_shi_map.png (residualized)")
+
+    # Also save the raw SHI as the analog of paper Appendix Figure A.1.
+    fig, ax = plt.subplots(figsize=(12, 7))
+    gdf.plot(
+        column="shi", cmap="viridis", linewidth=0.1,
+        edgecolor="white", legend=True,
+        legend_kwds={"label": "Soil Heterogeneity Index (raw, 1 − HHI)",
+                     "shrink": 0.6},
+        ax=ax, missing_kwds={"color": "#eeeeee"},
+    )
+    ax.set_title(
+        "Figure A.1: County-level Soil Heterogeneity Index — CONUS (raw)",
+        fontsize=13,
+    )
+    ax.set_axis_off()
+    fig.tight_layout()
+    fig.savefig(FIGS / "figureA1_shi_raw_map.png", dpi=180, bbox_inches="tight")
+    plt.close(fig)
+    print("  saved figureA1_shi_raw_map.png (raw)")
 
 
 def fig2_lni_map() -> None:

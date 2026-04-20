@@ -14,7 +14,9 @@ Built for NUS BZD6004 Applied Econometrics II (Sem 2, 2025-2026).
 
 ![SHI Map](figures/figure1_shi_map.png)
 
-*Darker = more homogeneous soil; brighter = more heterogeneous. Source: STATSGO2 soil polygons overlaid onto 1940 county boundaries.*
+*SHI after partialling out state fixed effects — the version used in the paper's main Figure 1 (Raz 2025, p.8, fn.5). Blue = relatively homogeneous within its state; red = relatively heterogeneous. The raw (unresidualised) SHI map is saved as `figures/figureA1_shi_raw_map.png` and corresponds to the paper's Appendix Figure A.1.*
+
+*Source: STATSGO2 soil polygons overlaid onto 1940 county boundaries.*
 
 ### SHI vs. Fertilizer adoption (1920)
 
@@ -128,12 +130,14 @@ All joins are left joins — if a variable is unavailable for a particular count
 
 ### Table 2 — Main result: does soil heterogeneity weaken communal identity?
 
-| Spec | Our estimate (1% sample) | Paper (full count) |
+| Spec | Our estimate (1% sample) | Paper Table 2 (full count) |
 |---|---|---|
-| (1) No controls | +14.42*** | −4.52*** |
-| (2) + State×year FE | **−0.84** | −5.51*** |
-| (3) + Geo-climatic | **−0.65** | −2.91*** |
-| **(4) Preferred** | **−0.81** | **−2.49*** |
+| (1) No controls | +14.42*** | −4.524*** (1.342) |
+| (2) + State×year FE | **−0.84** | −5.511*** (0.893) |
+| (3) + Geo-climatic | **−0.65** | −2.914*** (0.731) |
+| **(4) Preferred** | **−0.81** | **−2.486*** (0.725)** |
+
+Paper values are taken directly from Raz (2025), Table 2 (p.39); standard errors clustered at arbitrary 100-mile grid cells in parentheses.
 
 Our preferred estimate is **negative**, matching the paper's direction. The smaller magnitude and lack of statistical significance are expected: our 1% sample introduces measurement error in the LNI, which attenuates the coefficient toward zero (classical attenuation bias).
 
