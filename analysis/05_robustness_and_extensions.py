@@ -77,16 +77,12 @@ def extension_crop_belt(panel: pd.DataFrame) -> None:
 
     # Regress lni on shi × wheat_belt with state-by-year FE
     from _common import run_main_spec
-    # Subset-wise regressions
     for label, subset in [
         ("wheat belt", d[d["wheat_belt"] == 1]),
         ("non-wheat belt", d[d["wheat_belt"] == 0]),
     ]:
-        try:
-            res = run_main_spec(subset, "lni", ctrls=CONTROL_COLS_FULL)
-            print(f"  {label:20s}: {format_row(res)}")
-        except Exception as e:
-            print(f"  {label}: {e}")
+        res = run_main_spec(subset, "lni", ctrls=CONTROL_COLS_FULL)
+        print(f"  {label:20s}: {format_row(res)}")
 
 
 def main() -> None:

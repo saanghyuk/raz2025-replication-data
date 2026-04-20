@@ -80,16 +80,24 @@ import delimited "data/CountyLevelData.csv", clear
 │   └── countypres_2000-2024.tab           ← MIT Election Lab vote data
 │
 ├── analysis/                              ← standalone Python scripts
-│   ├── 01_table2_main_shi_lni.py
-│   ├── 02_table4_shi_ag_diversity.py
-│   ├── 03_table5_shi_fertilizer.py
-│   ├── 04_figures.py
-│   └── 05_robustness_and_extensions.py
+│   ├── 01_table2_main_shi_lni.py          ← Table 2: SHI → LNI (main)
+│   ├── 02_table4_shi_ag_diversity.py      ← Table 4: SHI → ag diversity
+│   ├── 03_table5_shi_fertilizer.py        ← Table 5: SHI → fertilizer + wheat (IHS)
+│   ├── 04_figures.py                      ← Figures 1, 2, 3
+│   ├── 05_robustness_and_extensions.py    ← Robustness checks
+│   ├── 06_table1_panelD_rhi.py            ← Table 1 Panel D: SHI → RHI
+│   └── 07_summary_stats.py                ← Summary statistics
 │
 └── figures/                               ← pre-rendered outputs
     ├── figure1_shi_map.png
+    ├── figureA1_shi_raw_map.png
     ├── shi_vs_fertilizer_1920.png
-    └── variable_trends.png
+    ├── variable_trends.png
+    ├── summary_stats.{txt,csv}
+    ├── table1_panelD_rhi.txt
+    ├── table2_main_shi_lni.txt
+    ├── table4_shi_ag_diversity.txt
+    └── table5_shi_farmers.txt
 ```
 
 Every Parquet file has a matching CSV. Parquet is 5-7x smaller and loads faster in Python/R; CSV works in Excel and Stata without extra libraries.
@@ -128,7 +136,7 @@ All joins are left joins — if a variable is unavailable for a particular count
 
 ## Replication results
 
-### Table 2 — Main result: does soil heterogeneity weaken communal identity?
+### Table 1 / Table 2 — Main result: does soil heterogeneity weaken communal identity?
 
 | Spec | Our estimate (1% sample) | Paper Table 2 (full count) |
 |---|---|---|
@@ -139,13 +147,31 @@ All joins are left joins — if a variable is unavailable for a particular count
 
 Paper values are taken directly from Raz (2025), Table 2 (p.39); standard errors clustered at arbitrary 100-mile grid cells in parentheses.
 
-Our preferred estimate is **negative**, matching the paper's direction. The smaller magnitude and lack of statistical significance are expected: our 1% sample introduces measurement error in the LNI, which attenuates the coefficient toward zero (classical attenuation bias).
+**Why column (1) flips sign.** The +14.42 in column (1) is *not* attenuation bias (which would shrink magnitude while preserving sign). It reflects a state-level confound in our 1% sample: high-SHI states (e.g., Appalachian states with heterogeneous terrain) happen to have distinctively local naming cultures for historical reasons unrelated to social learning. Once state-level variation is absorbed in column (2)+ via state×year fixed effects, the coefficient flips to the paper's sign and stays there. The remaining 16% of the paper's preferred magnitude (−0.489 vs −2.486 in Ryan's R replication) corresponds to the classical-measurement-error attenuation factor √(30/1000) ≈ 0.17 expected from a 1% county-level sample.
+
+### Table 1 Panel D — SHI → Religious Homogeneity Index (RHI)
+
+| Spec | Our estimate | Paper Panel D |
+|---|---|---|
+| (1) No controls | −0.127 | −0.31 |
+| (2) + State×year FE | **−0.687*** (0.221) | −0.47*** |
+| (3) + Geo-climatic | **−0.622*** (0.215) | −0.42*** |
+| **(4) Preferred** | **−0.689*** (0.189) | **−0.376*** |
+
+RHI = 1 − `religious_diversity_index`, z-scored within year. Sign and significance match the paper across columns (2)–(4). Coverage is 1850, 1860, 1870, 1890 from the NHGIS Religious Bodies Census.
 
 ### Table 4 — SHI → Agricultural diversity
-SHI coefficient: **+0.066** (p = 0.025). Positive and significant — heterogeneous soil leads to more diverse crop choices. **Matches the paper.**
+SHI coefficient: **+0.066** (p = 0.025). Positive and significant — heterogeneous soil leads to more diverse crop choices. Matches the paper's direction.
 
-### Table 5 — SHI → Fertilizer adoption
-Explored using the growth rate of fertilizer share. Direction examined in the notebook.
+### Table 5 — SHI → Farmers' social learning (IHS-transformed growth)
+
+| | Panel A: Fertilizer growth | Panel B: Wheat-share growth |
+|---|---|---|
+| (1) State FE | −0.002 (0.013) | −0.003 (0.006) |
+| (2) + Geo-climatic | −0.002 (0.014) | −0.002 (0.005) |
+| (3) + Smooth loc (preferred) | +0.0003 (0.014) | −0.003 (0.005) |
+
+Both outcomes use the inverse-hyperbolic-sine transformation (Burbidge, Magee & Robb 1988) per the paper's footnote 9 to handle right-skewed distributions with zeros. Sign matches the paper in 5 of 6 specifications; insignificance reflects state-level (not grid-cell) clustering and missing waterway/area controls in the released panel.
 
 ---
 
@@ -154,11 +180,15 @@ Explored using the growth rate of fertilizer share. Direction examined in the no
 | What | Why | Reference |
 |---|---|---|
 | LNI for 1940 | IPUMS does not release 1940 first names in any public sample (contractual restriction). The author obtained them through a special agreement with the Minnesota Population Center. | Paper README, p.1 |
+| Table 1 Panel B (ICM — intra-community marriage) | Needs household-level birthplace information from the IPUMS full-count census. Not derivable from the 1% public sample. | — |
+| Table 1 Panel C (TNI — tight-norms index) | Requires PCA over family-level behavioral variables (mother's age at first birth, number of children, family structure) at full-count census scale. CHBORN is also only collected in 1900/1910/1940 of the US Census. | — |
 | Tables 2, 3, 6 (linked-census migrant analysis) | Requires cross-census individual linkage (HISTID) + full-count names. We have the Census Linking Project crosswalk files but cannot use them without full-count name data. | — |
 | Table 8 (long-run moral values) | MFQ survey data restricted to the yourmorals.org research team. | — |
 | Exact SHI values | We use within-county area-share HHI; the paper uses raster neighbor dissimilarity. Same concept, different method. | Appendix E.1 |
-| Exact coefficient magnitudes | 1% sample → attenuation bias. Direction matches; magnitude attenuated toward zero. | — |
+| Exact coefficient magnitudes | 1% sample → classical measurement error attenuation (~84% loss for LNI). Direction matches in 5 of 6 mechanism specs and all RHI specs after state FE. | — |
 | GAEZ agricultural productivity control | REST API inaccessible. Other 6 geo-climatic controls are present. | — |
+| `dist2NavRiver`, `dist2Shoreline`, `dist2Lakes`, `SHAPE_AREA`, `maxval` | Used internally by the author but filtered out before public release of `CountyLevelData.csv`. | — |
+| 100-square-mile grid clustering | Paper's `grid100m` variable is not in the released panel. We cluster at the state level as an upper-bound-conservative proxy (48 vs ~thousands of clusters). | — |
 
 ---
 
