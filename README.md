@@ -204,7 +204,7 @@ Using Jiayi's data with all controls + grid clusters + sustainability indices.
 | `WheatShareData_Jiayi.csv` | Jiayi | Regression-ready Table 5 Panel B (74 cols) |
 | `sustainability_index/` | Jiayi | Crop sustainability indices (10 crops) |
 | `nhgis0003_ds74_1936_county.csv` | Vicky | 1936 Religious Bodies Census |
-| `linked_1850_1880_movers.csv` | — | Census Linking output: 406k linked movers |
+| `linked_1850_1880_movers.parquet` | — | Census Linking output: 406k linked movers (parquet, 20 MB) |
 | `docs/` | Jiayi/Vicky | Variable construction guides (TNI, ICM, RHI, SHI methodology) |
 
 ---
@@ -220,7 +220,7 @@ Using Jiayi's data with all controls + grid clusters + sustainability indices.
 │   ├── CountyLevelData.parquet (.csv)  ← master panel (38 cols, 1.9 MB)
 │   ├── FertilizerData_Jiayi.csv        ← regression-ready (76 cols)
 │   ├── WheatShareData_Jiayi.csv        ← regression-ready (74 cols)
-│   ├── linked_1850_1880_movers.csv     ← Census Linking output
+│   ├── linked_1850_1880_movers.parquet     ← Census Linking output
 │   ├── ipums006_*.parquet (.csv)       ← TNI, ICM, farmers, SFT, BPD
 │   ├── LNI_by_county.parquet (.csv)    ← LNI (1% sample)
 │   ├── sustainability_index/           ← crop sustainability rasters
