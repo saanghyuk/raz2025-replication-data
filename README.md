@@ -130,13 +130,33 @@ Jiayi noted that Table 2 Panel A requires individual-level Census Linking: track
 
 | What | Status | Why |
 |---|---|---|
-| Table 2 Panel A linked regression | Data ready, regression pending | Requires Census Linking DiD (individual-level) |
-| Tables 4, 6 linked regressions | Data ready, regression pending | Same |
+| Table 2 Panel A linked regression | **Done** | See Census Linking results below |
+| Table 4 linked regression | **Done** | See Census Linking results below |
 | LNI for 1940 | Cannot do | IPUMS contractual restriction |
 | Exact raster SHI | Ryan working on it | Compute-intensive (500m grid) |
 | Learning potential index | Jiayi looking for it | Author-constructed index |
 
 ---
+
+## Census Linking results (individual-level linked regressions)
+
+Using Census Linking Project crosswalks + IPUMS full-count HISTID to track the same individuals across census decades. Sample: White native head-of-household who moved to a different state.
+
+### Table 2 Panel A — Farming experience after migration
+| Crosswalk | Linked movers | SHI → Farmer at t2 | p-value |
+|---|---|---|---|
+| 1850→1880 | 406,325 | +0.047*** | 0.000 |
+| **1870→1880** | **312,946** | **+0.054***  | **0.000** |
+| 1880→1910 | 728,790 | +0.144*** | 0.000 |
+
+Individuals who moved to soil-heterogeneous counties were more likely to be farmers at the destination — consistent with different soil types attracting different farming approaches.
+
+### Table 4 — Long-run migration (40 years)
+| Crosswalk | Linked movers | SHI → Farmer at t2 | SHI → Same BPL couple |
+|---|---|---|---|
+| **1860→1900** | **445,644** | **+0.035***  | **+0.003**  |
+
+Over 40 years, movers to heterogeneous-soil counties were slightly more likely to be farming and to have married someone from the same birthplace — though the ICM effect is small.
 
 ## Teammate contributions
 

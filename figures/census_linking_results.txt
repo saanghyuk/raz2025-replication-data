@@ -1,0 +1,5 @@
+CENSUS LINKING (1850-1880, lowercase HISTID match)
+Crosswalk pairs: 1,601,457
+Linked individuals: 1,174,940
+White native HH movers: 406,325
+Table 2 Panel A: farmer_t2 ~ SHI = +0.0470*** (SE=0.0059,p=0.000,n=406,325)

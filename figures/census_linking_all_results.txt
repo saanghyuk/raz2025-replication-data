@@ -1,0 +1,14 @@
+CENSUS LINKING RESULTS (all crosswalk pairs)
+============================================================
+
+Table 2 (1870→1880):
+  Farming at t2: SHI=+0.0540*** (SE=0.0065,p=0.000,n=312,588)
+  Same BPL (ICM proxy): SHI=+0.0010 (SE=0.0007,p=0.174,n=312,588)
+
+Table 4 (1860→1900):
+  Farming at t2: SHI=+0.0346*** (SE=0.0050,p=0.000,n=445,044)
+  Same BPL (ICM proxy): SHI=+0.0028** (SE=0.0012,p=0.022,n=445,044)
+
+Additional (1880→1910):
+  Farming at t2: SHI=+0.1441*** (SE=0.0031,p=0.000,n=728,167)
+  Same BPL (ICM proxy): SHI=-0.0001 (SE=0.0003,p=0.805,n=728,167)
