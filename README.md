@@ -27,6 +27,18 @@ Or open `notebooks/replication.ipynb` for the full walkthrough.
 
 ## Replication results
 
+### Table 1 — SHI → Community outcomes with full controls
+
+Using sustainability indices + higher-order controls (SD of temperature, precipitation, slope, elevation, flow accumulation) as requested. State FE, HC1 SE.
+
+| Panel | Outcome | SHI coef | p-value | n | Paper direction | Match? |
+|---|---|---|---|---|---|---|
+| **B** | RHI (religious homogeneity) | −0.122*** | 0.000 | 5,143 | negative | **yes** |
+| **B** | ICM (marriage homogeneity) | −0.007 | 0.544 | 6,835 | negative | direction yes |
+| **C** | TNI (tight norms, z-scored) | +0.728*** | 0.000 | 3,438 | negative | no (see note) |
+
+*Controls: base geo-climatic + productivity + river density + SD(elevation, slope, flow, precip, temp) + sustainability indices (10 crops).*
+
 ### Table 5 — SHI → Fertilizer / Wheat adoption (Jiayi's regression-ready data)
 
 Using all controls: base geo-climatic + productivity + river density + SD(elevation, slope, flow, precip, temp) + sustainability indices (10 crops). State FE, HC1 SE.
