@@ -1,0 +1,13 @@
+TABLE 2 — INDIVIDUAL-LEVEL REGRESSION
+Spec: outcome_i = β·SHI_d + X_d·Γ + X_i·Ω + origin_FE + ε_i
+Sample: white native movers (state change)
+Clustered SE at destination county
+Consecutive decade crosswalks per Jiayi's spec
+============================================================
+
+1850→1860 Farming at t1 (premigration, 1850)           : SHI=-0.0042 (SE=0.0110,p=0.704,n=261,860)
+1850→1860 Farming at t2 (1860)                         : SHI=+0.0153 (SE=0.0495,p=0.757,n=261,860)
+1860→1870 Farming at t1 (premigration, 1860)           : SHI=-0.0129 (SE=0.0110,p=0.241,n=447,354)
+1860→1870 Farming at t2 (1870)                         : SHI=+0.0295 (SE=0.0593,p=0.618,n=447,354)
+1870→1880 Farming at t1 (premigration, 1870)           : SHI=+0.0039 (SE=0.0130,p=0.766,n=580,991)
+1870→1880 Farming at t2 (1880)                         : SHI=+0.0276 (SE=0.0768,p=0.719,n=580,991)

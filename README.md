@@ -166,6 +166,23 @@ Using Jiayi's data with all controls + grid clusters + sustainability indices.
 
 ---
 
+### Table 2 — Individual-level regression (Jiayi's spec)
+
+Regression: outcome_i = β·SHI_d + θ_origin + X_d·Γ + X_i·Ω + ε_i. Consecutive decade crosswalks. Origin-state FE, destination geo-climatic controls, individual controls (age, sex). SE clustered at destination county.
+
+| Crosswalk | Outcome | SHI coef | p-value | n |
+|---|---|---|---|---|
+| 1850→1860 | Premigration farming | −0.004 | 0.704 | 261,860 |
+| 1850→1860 | Farming at destination | +0.015 | 0.757 | 261,860 |
+| 1860→1870 | Premigration farming | −0.013 | 0.241 | 447,354 |
+| 1860→1870 | Farming at destination | +0.030 | 0.618 | 447,354 |
+| 1870→1880 | Premigration farming | +0.004 | 0.766 | 580,991 |
+| 1870→1880 | Farming at destination | +0.028 | 0.719 | 580,991 |
+
+Individual-level results are not statistically significant. This contrasts with the county-level results above. The difference likely reflects: (1) origin-state FE absorbing much of the cross-state SHI variation, (2) our simplified SHI measure (area-share HHI vs raster neighbor-dissimilarity), and (3) the absence of the full set of origin-destination-state-year FE that the paper uses. The exact FE structure requires further refinement.
+
+---
+
 ## Teammate contributions
 
 | File | From | Description |
