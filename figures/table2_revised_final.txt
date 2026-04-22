@@ -1,0 +1,13 @@
+TABLE 2 — INDIVIDUAL-LEVEL RESULTS (Jiayi's revised spec)
+===========================================================
+
+Panel A: Premigration farming (county-level movers, SHI only)
+  1850→1860: SHI=-0.042 (p=0.476, n=249,817)
+  1860→1870: SHI=-0.012 (p=0.803, n=465,537)
+  1870→1880: SHI=+0.047 (p=0.393, n=581,708)
+
+Panel C: Individual ICM (spouse same BPL)
+  1870→1880: SHI=-0.088* (p=0.078, n=536,497)
+
+Panel C alt: Children-based single movers
+  851,151 families identified

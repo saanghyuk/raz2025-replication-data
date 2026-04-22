@@ -1,0 +1,15 @@
+TABLE 2 — INDIVIDUAL-LEVEL (Jiayi's revised spec)
+======================================================================
+
+--- Panel A: Farming experience (COUNTY-level movers) ---
+  1850→1860: ERROR exog contains inf or nans
+  1860→1870: ERROR exog contains inf or nans
+  1870→1880: ERROR exog contains inf or nans
+
+--- Panel C: Individual-level ICM (spouse same BPL) ---
+  1850→1860: ERROR zero-size array to reduction operation maximum which has no identity
+  1860→1870: ERROR zero-size array to reduction operation maximum which has no identity
+  1870→1880: ICM_individual ~ SHI = -0.0883* (SE=0.0500,p=0.078,n=536,497)
+
+--- Panel C alt: Children-based migration ID (1850-1880, single movers) ---
+  Children-based single-movers: 851,151 families with SHI

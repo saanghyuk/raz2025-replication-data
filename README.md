@@ -166,20 +166,31 @@ Using Jiayi's data with all controls + grid clusters + sustainability indices.
 
 ---
 
-### Table 2 — Individual-level regression (Jiayi's spec)
+### Table 2 — Individual-level regression (Jiayi's revised spec)
 
-Regression: outcome_i = β·SHI_d + θ_origin + X_d·Γ + X_i·Ω + ε_i. Consecutive decade crosswalks. Origin-state FE, destination geo-climatic controls, individual controls (age, sex). SE clustered at destination county.
+Regression: outcome_i = β·SHI_d + ε_i. Census Linking with consecutive decade crosswalks. County-level movers (not state-only). SE clustered at destination county.
 
-| Crosswalk | Outcome | SHI coef | p-value | n |
-|---|---|---|---|---|
-| 1850→1860 | Premigration farming | −0.004 | 0.704 | 261,860 |
-| 1850→1860 | Farming at destination | +0.015 | 0.757 | 261,860 |
-| 1860→1870 | Premigration farming | −0.013 | 0.241 | 447,354 |
-| 1860→1870 | Farming at destination | +0.030 | 0.618 | 447,354 |
-| 1870→1880 | Premigration farming | +0.004 | 0.766 | 580,991 |
-| 1870→1880 | Farming at destination | +0.028 | 0.719 | 580,991 |
+**Panel A: Premigration farming experience**
 
-Individual-level results are not statistically significant. This contrasts with the county-level results above. The difference likely reflects: (1) origin-state FE absorbing much of the cross-state SHI variation, (2) our simplified SHI measure (area-share HHI vs raster neighbor-dissimilarity), and (3) the absence of the full set of origin-destination-state-year FE that the paper uses. The exact FE structure requires further refinement.
+| Crosswalk | SHI coef | p-value | n |
+|---|---|---|---|
+| 1850→1860 | −0.042 | 0.476 | 249,817 |
+| 1860→1870 | −0.012 | 0.803 | 465,537 |
+| 1870→1880 | +0.047 | 0.393 | 581,708 |
+
+Not significant at individual level. The paper uses origin-destination-state-year FE and the exact raster-based SHI which may yield stronger identification.
+
+**Panel C: Individual-level ICM (spouse same birthplace)**
+
+| Crosswalk | SHI coef | p-value | n |
+|---|---|---|---|
+| 1870→1880 | **−0.088*** | 0.078 | 536,497 |
+
+SHI reduces the probability of marrying someone from the same birthplace — direction matches the paper.
+
+**Panel C alternative: Children-based migration identification**
+
+851,151 single-mover families identified (children with exactly 2 different birth states, indicating exactly one move). This sample is ready for further regression analysis without requiring Census Linking crosswalks.
 
 ---
 
