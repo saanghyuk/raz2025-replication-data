@@ -1,0 +1,182 @@
+--------------------------------------------------------------------------------
+Codebook for NHGIS data file 'nhgis0003_ds74_1936_county'
+--------------------------------------------------------------------------------
+ 
+Contents
+    - Data Summary
+    - Data Dictionary
+    - Citation and Use
+ 
+Additional documentation on NHGIS data sources is available at: 
+    https://www.nhgis.org/documentation/tabular-data 
+ 
+--------------------------------------------------------------------------------
+Data Summary
+--------------------------------------------------------------------------------
+ 
+Year:             1936
+Geographic level: County (by State)
+Extent:           All areas
+Dataset:          1936 Census of Religious Bodies: Religious Bodies Data [States & Counties]
+   NHGIS code:    1936_cRelig
+   NHGIS ID:      ds74
+ 
+Tables:
+ 
+1. Number of Members by Churches
+   Universe:    Members of All Denominations
+   Source code: NT2
+   NHGIS code:  BTV
+ 
+2. Members of All Denominations, 1936
+   Universe:    Members of All Denominations in 1936
+   Source code: NT3
+   NHGIS code:  BTW
+ 
+--------------------------------------------------------------------------------
+Data Dictionary
+--------------------------------------------------------------------------------
+ 
+Context Fields 
+    GISJOIN:     GIS Join Match Code
+    YEAR:        Data File Year
+    STATE:       State Name
+    STATEA:      State Code
+    COUNTY:      County Name
+    COUNTYA:     County Code
+    AREANAME:    Area name
+    STATEICP:    ICPSR State Code
+    COUNTYICP:   ICPSR County Code
+ 
+Table 1:     Number of Members by Churches
+Universe:    Members of All Denominations
+Source code: NT2
+NHGIS code:  BTV
+    BTV001:      Adventist bodies
+    BTV002:      Seventh Day Adventist Church
+    BTV003:      All other bodies
+    BTV004:      American Baptist Association
+    BTV005:      Armenian Church of America
+    BTV006:      Assemblies of God, General Council
+    BTV007:      Colored Primitive Baptist Church
+    BTV008:      Free Will Baptist Church
+    BTV009:      General Baptist Church
+    BTV010:      Negro Baptist Church
+    BTV011:      Northern Baptist Convention
+    BTV012:      Primitive Baptist Church
+    BTV013:      Regular Baptist Church
+    BTV014:      Southern Baptist Convention
+    BTV015:      United Baptist Church
+    BTV016:      United American Free Will Baptist Church (Colored)
+    BTV017:      Brethren (Conservative Dunkers) Church
+    BTV018:      Brethren (Progressive Dunkers) Church
+    BTV019:      Buddist Mission of North America
+    BTV020:      Churches of Christ
+    BTV021:      Church of Christ, Scientist
+    BTV022:      Church of God
+    BTV023:      Church of God in Christ
+    BTV024:      The General Eldership of the Churches of God in North America
+    BTV025:      Church of the Nazarene
+    BTV026:      Church of the Brethren
+    BTV027:      Congregational and Christian Churches
+    BTV028:      Disciples of Christ Church
+    BTV029:      Eastern Orthodox Church
+    BTV030:      Russian Orthodox Church
+    BTV031:      Evangelical and Reformed Church
+    BTV032:      Evangelical Church
+    BTV033:      Evangelical Congregational Church
+    BTV034:      Evangelical Augustana Synods of North America
+    BTV035:      Evagelical United of Bohemian and Moravian Brethren Church
+    BTV036:      Federated Churches
+    BTV037:      Friends (4 bodies)
+    BTV038:      Friends (Orthodox) Church
+    BTV039:      Greek Orthodox Church (Hellenic)
+    BTV040:      Jewish organizations
+    BTV041:      Latter-Day Church of Jesus Christ
+    BTV042:      Reorganized Church of Jesus Christ of Latter-Day Saints
+    BTV043:      American Lutheran Church
+    BTV044:      Lutheran Augustana Synod of North America
+    BTV045:      Finnish or Suomi Lutheran Synod Church
+    BTV046:      Lutheran Free Church
+    BTV047:      Joint Lutheran Synod of Wisconsin and Other States
+    BTV048:      Norwegian Lutheran Church of America
+    BTV049:      Lutheran Synod of Misouri, Ohio, and Other States
+    BTV050:      United Danish Lutheran Church in America
+    BTV051:      United Lutheran Church
+    BTV052:      United Lutheran Church in America
+    BTV053:      Mennonite bodies
+    BTV054:      African Methodist Episcopal Church
+    BTV055:      African Methodist Episcopal Zion Church
+    BTV056:      Colored Methodist Episcopal Church
+    BTV057:      Methodist Episcopal Church
+    BTV058:      Methodist Episcopal Church, South
+    BTV059:      Methodist Protestant Church
+    BTV060:      Polish National Catholic Church
+    BTV061:      Cumberland Presbyterian Church
+    BTV062:      Presbyterian Church in the United States
+    BTV063:      Presbyterian Church in the U.S.A.
+    BTV064:      United Presbyterian Church of North America
+    BTV065:      Protestant Episcopal Church
+    BTV066:      Christian Reformed Church
+    BTV067:      Reformed Church in America
+    BTV068:      Roman Catholic Church
+    BTV069:      Salvation Army
+    BTV070:      Scandinavian Evangelical bodies
+    BTV071:      Unitarian Church
+    BTV072:      United Brethren in Christ Church
+    BTV073:      Universalist Church
+    BTV074:      General Synod of the Associate Reformed Prebyterian Church
+ 
+Table 2:     Members of All Denominations, 1936
+Universe:    Members of All Denominations in 1936
+Source code: NT3
+NHGIS code:  BTW
+    BTW001:      Total
+ 
+--------------------------------------------------------------------------------
+Citation and Use of NHGIS Data
+--------------------------------------------------------------------------------
+ 
+All persons are granted a limited license to use this documentation and the
+accompanying data, subject to the following conditions:
+
+* REDISTRIBUTION: You will not redistribute the data without permission.
+
+  You may publish a subset of the data to meet journal requirements for accessing 
+  data related to a particular publication. Contact us for permission for any other 
+  redistribution; we will consider requests for free and commercial redistribution.
+
+* CITATION: You will cite NHGIS appropriately.
+
+    * Publications and research reports employing NHGIS data (either tabular or GIS) 
+      should include the following citation:
+
+        Jonathan Schroeder, David Van Riper, Steven Manson, Katherine Knowles, Tracy Kugler, Finn Roberts, and Steven Ruggles. 
+        IPUMS National Historical Geographic Information System: Version 20.0 
+        [dataset]. Minneapolis, MN: IPUMS. 2025. 
+        http://doi.org/10.18128/D050.V20.0
+
+    * For policy briefs, online resources, or articles in the popular press, we 
+      recommend that you cite the use of NHGIS data as follows:
+
+        IPUMS NHGIS, University of Minnesota, www.nhgis.org.
+
+These terms of use are a legally binding agreement. You can use the data only in 
+accordance with these terms, and any other use is a violation of the agreement. 
+Violations may result in revocation of the agreement and prohibition from using other 
+IPUMS data. If IPUMS or our partners are harmed from your violation, you are 
+responsible for all damages, including reasonable attorney's fees and expenses.
+        
+In addition, we request that users send us a copy of any publications, research
+reports, or educational material making use of the data or documentation.
+
+Send electronic material to: nhgis@umn.edu
+
+Printed matter should be sent to:
+
+    IPUMS NHGIS
+    Institute for Social Research and Data Innovation
+    University of Minnesota
+    50 Willey Hall
+    225 19th Ave S
+    Minneapolis, MN 55455
