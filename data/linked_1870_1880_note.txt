@@ -1,3 +1,0 @@
-Linked data for 1870→1880 was computed via DuckDB
-See figures/census_linking_all_results.txt for regression results
-To regenerate: run scripts/23_compute_all_from_006.py with the crosswalk
