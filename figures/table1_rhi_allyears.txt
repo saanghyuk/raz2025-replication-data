@@ -1,0 +1,4 @@
+Table 1 Panel D — RHI (all years: [np.int64(1850), np.int64(1860), np.int64(1870), np.int64(1890), np.int64(1906), np.int64(1916), np.int64(1926)])
+RHI ~ SHI = -0.0622*** (SE=0.0097, p=0.000, n=16,682)
+Previous (3 decennial years): n=5,143
+Updated (all 7 years): n=16,682
