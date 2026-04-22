@@ -58,9 +58,9 @@ SHI reduces the growth rate of both fertilizer adoption and wheat cultivation �
 - **LNI (−1.03, p=0.059):** Direction matches the paper (−2.49***). Smaller magnitude and marginal significance are expected from using 1% census sample instead of full count (classical attenuation bias from measurement error).
 - **Fertilizer share level (+0.14):** Positive in level but negative in growth rate. The paper uses growth rate as the outcome, which is the correct test of the social learning channel.
 
-### Table 2 Panel A — individual-level linked analysis (pending)
+### Table 2 Panel A — individual-level linked analysis (completed)
 
-Jiayi noted that Table 2 Panel A requires individual-level Census Linking: tracking the same person across censuses to determine if they worked as a farmer in the earlier period. The HISTID + Census Linking Project crosswalk data is ready (confirmed working for all years with SAMPLE=185002), but the linked DiD regressions have not yet been implemented.
+Census Linking regressions implemented using HISTID + crosswalks. Results in the Census Linking section below.
 
 ---
 
