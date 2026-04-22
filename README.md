@@ -50,15 +50,43 @@ Controls include sustainability indices + higher-order controls (SDs). RHI uses 
 | **D** | Farm size Gini | +0.030*** | 0.000 | 21,125 | — | — |
 | **D** | BPD (full count) | +0.023 | 0.173 | 9,270 | — | — |
 
-### Table 2 Panel A — Farming experience (individual-level Census Linking)
+### Table 2 Panel A — Farming experience (county-level Census Linking, non-consecutive)
 
-Using Census Linking Project crosswalks + HISTID to track individuals across censuses. Sample: white native household heads who moved to a different state.
+Using Census Linking Project crosswalks + HISTID to track individuals across censuses. Sample: white native household heads who moved to a different county.
 
 | Crosswalk | Linked movers | SHI → Farmer at t2 | p-value |
 |---|---|---|---|
 | 1850→1880 | 406,325 | +0.047*** | 0.000 |
 | **1870→1880** | **312,946** | **+0.054***  | **0.000** |
 | 1880→1910 | 728,790 | +0.144*** | 0.000 |
+
+### Table 2 — Individual-level regression (consecutive crosswalks, Jiayi's spec)
+
+Regression: outcome_i = β·SHI_d + ε_i. Census Linking with consecutive decade crosswalks. County-level movers (not state-only). SE clustered at destination county.
+
+**Panel A: Premigration farming experience**
+
+| Crosswalk | SHI coef | p-value | n |
+|---|---|---|---|
+| 1850→1860 | −0.042 | 0.476 | 249,817 |
+| 1860→1870 | −0.012 | 0.803 | 465,537 |
+| 1870→1880 | +0.047 | 0.393 | 581,708 |
+
+Not significant at individual level. The paper uses origin-destination-state-year FE and the exact raster-based SHI which may yield stronger identification.
+
+**Panel C: Individual-level ICM (spouse same birthplace)**
+
+| Crosswalk | SHI coef | p-value | n |
+|---|---|---|---|
+| 1870→1880 | **−0.088*** | 0.078 | 536,497 |
+
+SHI reduces the probability of marrying someone from the same birthplace — direction matches the paper.
+
+**Panel C alternative: Children-based migration identification**
+
+851,151 single-mover families identified (children with exactly 2 different birth states, indicating exactly one move). This sample is ready for further regression analysis without requiring Census Linking crosswalks.
+
+
 
 ### Table 4 — Long-run migration (Census Linking, 40 years)
 
@@ -165,32 +193,6 @@ Using Jiayi's data with all controls + grid clusters + sustainability indices.
 | Exact coefficient magnitudes | 1% sample for LNI → attenuation bias; simplified SHI → different scale |
 
 ---
-
-### Table 2 — Individual-level regression (Jiayi's revised spec)
-
-Regression: outcome_i = β·SHI_d + ε_i. Census Linking with consecutive decade crosswalks. County-level movers (not state-only). SE clustered at destination county.
-
-**Panel A: Premigration farming experience**
-
-| Crosswalk | SHI coef | p-value | n |
-|---|---|---|---|
-| 1850→1860 | −0.042 | 0.476 | 249,817 |
-| 1860→1870 | −0.012 | 0.803 | 465,537 |
-| 1870→1880 | +0.047 | 0.393 | 581,708 |
-
-Not significant at individual level. The paper uses origin-destination-state-year FE and the exact raster-based SHI which may yield stronger identification.
-
-**Panel C: Individual-level ICM (spouse same birthplace)**
-
-| Crosswalk | SHI coef | p-value | n |
-|---|---|---|---|
-| 1870→1880 | **−0.088*** | 0.078 | 536,497 |
-
-SHI reduces the probability of marrying someone from the same birthplace — direction matches the paper.
-
-**Panel C alternative: Children-based migration identification**
-
-851,151 single-mover families identified (children with exactly 2 different birth states, indicating exactly one move). This sample is ready for further regression analysis without requiring Census Linking crosswalks.
 
 ---
 
