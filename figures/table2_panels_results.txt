@@ -1,0 +1,21 @@
+
+
+TABLE 2 PANELS (cross-sectional, state FE)
+======================================================================
+
+--- Panel A: Farming outcomes ---
+  Share farmers (full count)                   : SHI=-0.1030*** (SE=0.0175,p=0.000,n=9,273)
+
+--- Panel B: Communal identity (LNI) ---
+  LNI (1% sample)                              : SHI=-1.0317* (SE=0.5459,p=0.059,n=19,517)
+
+--- Panel C: Community structure ---
+  ICM (marriage homogeneity)                   : SHI=-0.0071 (SE=0.0117,p=0.544,n=6,835)
+  Religious diversity                          : SHI=+0.1219*** (SE=0.0191,p=0.000,n=5,143)
+  TNI (tight norms)                            : SHI=+0.7279*** (SE=0.1218,p=0.000,n=3,438)
+
+--- Panel D: Additional ---
+  Ag Diversity                                 : SHI=+0.0617*** (SE=0.0096,p=0.000,n=14,078)
+  Farm size Gini                               : SHI=+0.0304*** (SE=0.0049,p=0.000,n=21,125)
+  BPD (full count)                             : SHI=+0.0226 (SE=0.0166,p=0.173,n=9,270)
+  Divorce ratio                                : SHI=+0.0009 (SE=0.0006,p=0.154,n=6,839)

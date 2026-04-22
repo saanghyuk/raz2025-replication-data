@@ -1,0 +1,12 @@
+TABLE 5 (updated with sustainability + SD controls)
+======================================================================
+
+--- Baseline controls only ---
+  Fertilizer growth (baseline)                 : SHI25=-0.6538*** (SE=0.2022,p=0.001,n=8,942)
+  Wheat share growth (baseline)                : SHI25=-0.4358*** (SE=0.1637,p=0.008,n=19,449)
+
+--- + Sustainability + SD controls (Jiayi's request) ---
+  Fertilizer growth (full)                     : SHI25=-0.6460*** (SE=0.2045,p=0.002,n=8,933)
+  Wheat share growth (full)                    : SHI25=-0.3871** (SE=0.1624,p=0.017,n=19,431)
+  Fertilizer share level (full)                : SHI25=+0.1388*** (SE=0.0173,p=0.000,n=9,170)
+  Wheat share level (full)                     : SHI25=+0.0180** (SE=0.0084,p=0.031,n=21,091)

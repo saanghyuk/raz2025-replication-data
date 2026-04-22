@@ -1,7 +1,5 @@
 # Replication: Soil Heterogeneity, Social Learning, and Close-Knit Communities
 
-Replication data and analysis for:
-
 > Raz, I. T. (2025). *Soil Heterogeneity, Social Learning, and the Formation of Close-Knit Communities.* **Journal of Political Economy**, 133(8), 2643-2691.
 
 NUS BZD6004 Applied Econometrics II, Semester 2, 2025-2026.
@@ -10,94 +8,77 @@ NUS BZD6004 Applied Econometrics II, Semester 2, 2025-2026.
 
 ## Preview
 
-### County-level Soil Heterogeneity Index (Figure 1)
 ![SHI Map](figures/figure1_shi_map.png)
-
-*Source: STATSGO2 soil polygons overlaid onto 1940 county boundaries.*
-
-### SHI vs. Fertilizer adoption (1920)
 ![SHI vs Fertilizer](figures/shi_vs_fertilizer_1920.png)
-
-### Variable trends across census decades
 ![Trends](figures/variable_trends.png)
 
 ---
 
 ## Quick start
 
-Open the notebook for the full analysis:
-```
-notebooks/replication.ipynb
-```
-
-Or load the data directly:
 ```python
 import pandas as pd
 panel = pd.read_parquet("data/CountyLevelData.parquet")  # 1.9 MB
 ```
 
+Or open `notebooks/replication.ipynb` for the full walkthrough.
+
 ---
 
 ## Replication results
 
-All regressions use state FE + geo-climatic controls + smooth location polynomial, clustered SE.
+### Table 5 — SHI → Fertilizer / Wheat adoption (Jiayi's regression-ready data)
 
-### Table 1 Panel B — Community structure measures
-| Outcome | SHI coefficient | p-value | n | Paper direction | Match? |
+Using all controls: base geo-climatic + productivity + river density + SD(elevation, slope, flow, precip, temp) + sustainability indices (10 crops). State FE, HC1 SE.
+
+| Outcome | SHI25 coef | p-value | n | Paper direction | Match? |
 |---|---|---|---|---|---|
-| **RHI** (religious homogeneity) | **−0.122***  | 0.000 | 5,143 | negative | **yes** |
-| **ICM** (marriage homogeneity) | −0.007 | 0.544 | 6,835 | negative | direction yes, not significant |
+| **Fertilizer growth** | **−0.646***  | 0.002 | 8,933 | negative | **yes** |
+| **Wheat share growth** | **−0.387**  | 0.017 | 19,431 | negative | **yes** |
+| Fertilizer share (level) | +0.139*** | 0.000 | 9,170 | — | level, not growth |
+| Wheat share (level) | +0.018** | 0.031 | 21,091 | — | level, not growth |
 
-### Table 1 Panel C — Tight Norms Index
-| Outcome | SHI coefficient | p-value | n | Paper direction | Match? |
-|---|---|---|---|---|---|
-| **TNI** (z-scored) | +0.728*** | 0.000 | 3,438 | negative | no (see note below) |
+SHI reduces the growth rate of both fertilizer adoption and wheat cultivation — consistent with the paper's argument that soil heterogeneity limits social learning and slows technology diffusion.
 
-*Note: TNI direction differs from the paper. This is likely because our SHI uses within-county HHI rather than the paper's raster-based neighbor dissimilarity measure, which may affect the relationship with norm-tightness differently than with other community measures.*
+### Table 2 Panels — SHI → Various outcomes (cross-sectional, state FE)
 
-### Table 2 — Main result: SHI → LNI
-| Outcome | SHI coefficient | p-value | n | Paper result |
-|---|---|---|---|---|
-| **LNI** (1% sample) | **−1.032*** | 0.059 | 19,517 | −2.49*** |
+| Panel | Outcome | SHI coef | p-value | n | Paper direction | Match? |
+|---|---|---|---|---|---|---|
+| **A** | Share farmers (full count) | **−0.103***  | 0.000 | 9,273 | — | SHI reduces farming |
+| **B** | LNI (1% sample) | **−1.032*** | 0.059 | 19,517 | negative | **yes** |
+| **C** | ICM (marriage homogeneity) | −0.007 | 0.544 | 6,835 | negative | direction yes, not sig. |
+| **C** | Religious diversity | +0.122*** | 0.000 | 5,143 | positive | **yes** |
+| **C** | TNI (tight norms) | +0.728*** | 0.000 | 3,438 | negative | **no** (see note) |
+| **D** | Ag Diversity | +0.062*** | 0.000 | 14,078 | positive | **yes** |
+| **D** | Farm size Gini | +0.030*** | 0.000 | 21,125 | — | — |
+| **D** | BPD (full count) | +0.023 | 0.173 | 9,270 | — | — |
 
-Direction matches. Magnitude attenuated due to 1% sample (measurement error → attenuation bias). Nearly significant at 5% level.
+**Notes on direction mismatches:**
+- **TNI (+0.73 vs expected negative):** Our SHI uses within-county area-share HHI, not the paper's raster neighbor-dissimilarity. The relationship between SHI and norm-tightness appears sensitive to the SHI measurement method. Ryan is reconstructing the exact raster-based SHI which may resolve this.
+- **LNI (−1.03, p=0.059):** Direction matches the paper (−2.49***). Smaller magnitude and marginal significance are expected from using 1% census sample instead of full count (classical attenuation bias from measurement error).
+- **Fertilizer share level (+0.14):** Positive in level but negative in growth rate. The paper uses growth rate as the outcome, which is the correct test of the social learning channel.
 
-### Table 4 — SHI → Agricultural Diversity
-| Outcome | SHI coefficient | p-value | n | Paper result |
-|---|---|---|---|---|
-| **Ag Diversity** | **+0.062***  | 0.000 | 14,078 | positive, significant |
+### Table 2 Panel A — individual-level linked analysis (pending)
 
-**Matches the paper.** Heterogeneous soil leads to more diverse crop choices.
-
-### Additional results
-| Outcome | SHI coefficient | p-value | n |
-|---|---|---|---|
-| Share farmers (full count) | −0.103*** | 0.000 | 9,273 |
-| Farm size Gini | +0.030*** | 0.000 | 21,125 |
-| BPD (full count) | +0.023 | 0.173 | 9,270 |
+Jiayi noted that Table 2 Panel A requires individual-level Census Linking: tracking the same person across censuses to determine if they worked as a farmer in the earlier period. The HISTID + Census Linking Project crosswalk data is ready (confirmed working for all years with SAMPLE=185002), but the linked DiD regressions have not yet been implemented.
 
 ---
 
 ## Master panel: CountyLevelData (38 columns)
 
-27,989 rows = ~3,100 counties × 9 census decades (1850-1940).
+27,989 rows = ~3,100 counties × 9 census decades (1850-1940). Available as both `.parquet` (1.9 MB) and `.csv` (11 MB).
 
-### Core outcome variables
+### Core variables
 | Column | Description | Source | Years |
 |---|---|---|---|
+| `shi` | Soil Heterogeneity Index | STATSGO2 | all |
 | `lni_1pct` | Local Name Index (1% sample) | IPUMS 1% | 1850-1930 |
-| `tni_z` | Tight Norms Index (z-scored PCA) | IPUMS full count | 1900, 1910, 1940 |
+| `tni_z` | Tight Norms Index (z-scored) | IPUMS full count | 1900, 1910, 1940 |
 | `icm_rate` | Intra-Community Marriage rate | IPUMS full count | 1880-1940 |
-| `share_farmers_fc` | Share farmer households (full count) | IPUMS full count | 1850-1940 |
-| `bpd_fc` | Birth Place Diversity (full count) | IPUMS full count | 1850-1940 |
-| `divorce_ratio` | Divorce/marriage ratio | IPUMS full count | 1850-1940 |
-| `elderly_alone_share` | Elderly living alone | IPUMS full count | 1850-1940 |
-| `mean_nchild` | Mean children per HH head | IPUMS full count | 1850-1940 |
-
-### Independent variable
-| Column | Description | Source |
-|---|---|---|
-| `shi` | Soil Heterogeneity Index (1 − HHI over soil types) | STATSGO2 |
+| `share_farmers_fc` | Share farmer households | IPUMS full count | 1850-1940 |
+| `bpd_fc` | Birth Place Diversity | IPUMS full count | 1850-1940 |
+| `divorce_ratio` | Divorce/marriage ratio (SFT) | IPUMS full count | 1850-1940 |
+| `elderly_alone_share` | Elderly living alone (SFT) | IPUMS full count | 1850-1940 |
 
 ### Controls
 | Column | Source |
@@ -105,9 +86,9 @@ Direction matches. Magnitude attenuated due to 1% sample (measurement error → 
 | `mean_elevation_m`, `mean_slope_deg` | HydroSHEDS |
 | `mean_annual_temp_c`, `mean_annual_precip_mm` | WorldClim 2.1 |
 | `mean_flow_accum`, `river_density` | HydroSHEDS |
-| `centroid_lat/lon`, `lat_sq`, `lon_sq`, `lat_x_lon` | Smooth location polynomial |
+| `centroid_lat/lon`, `lat_sq`, `lon_sq`, `lat_x_lon` | Smooth location |
 
-### Other time-varying
+### Time-varying
 | Column | Years | Source |
 |---|---|---|
 | `share_farms_reporting_fert` | 1910-1930 | NHGIS |
@@ -116,54 +97,54 @@ Direction matches. Magnitude attenuated due to 1% sample (measurement error → 
 | `religious_diversity_index` | 1850-1926 | NHGIS |
 | `farm_size_gini` | 1860-1940 | NHGIS |
 | `slave_share` | 1850-1860 | NHGIS |
-| `birth_place_diversity` | 1870-1940 | NHGIS (proxy) |
 
 ---
 
 ## Data sources
 
-| Source | URL | What we used |
+| Source | URL | Used for |
 |---|---|---|
-| [IPUMS NHGIS](https://www.nhgis.org/) | nhgis.org | County boundaries, agricultural/population/religious census |
-| [IPUMS USA](https://usa.ipums.org/) | usa.ipums.org | Full-count census (TNI, ICM, farmer share, SFT, BPD) + 1% sample (LNI) |
-| [USDA STATSGO2](https://www.nrcs.usda.gov/) | nrcs.usda.gov | Soil polygons → SHI |
-| [HydroSHEDS v1](https://www.hydrosheds.org/) | hydrosheds.org | Elevation, slope, flow, river density |
+| [IPUMS NHGIS](https://www.nhgis.org/) | nhgis.org | County data + boundaries |
+| [IPUMS USA](https://usa.ipums.org/) | usa.ipums.org | Full-count census + 1% sample |
+| [USDA STATSGO2](https://www.nrcs.usda.gov/) | nrcs.usda.gov | Soil → SHI |
+| [HydroSHEDS v1](https://www.hydrosheds.org/) | hydrosheds.org | Elevation, slope, flow |
 | [WorldClim v2.1](https://www.worldclim.org/) | worldclim.org | Temperature, precipitation |
-| [MIT Election Lab](https://electionlab.mit.edu/) | electionlab.mit.edu | County presidential returns |
-| [Census Linking Project](https://censuslinkingproject.org/) | censuslinkingproject.org | Cross-census individual linkage (HISTID) |
+| [MIT Election Lab](https://electionlab.mit.edu/) | electionlab.mit.edu | Presidential returns |
+| [Census Linking Project](https://censuslinkingproject.org/) | censuslinkingproject.org | Individual linkage (HISTID) |
 
 ---
 
 ## How data was merged
 
-1. **County skeleton**: 3,108 counties (NHGIS 1940 shapefile) × 9 decades = base panel
-2. **SHI**: STATSGO2 soil polygons → area-share HHI per county (time-invariant)
-3. **Geo-climatic controls**: Zonal statistics from HydroSHEDS + WorldClim rasters (time-invariant)
-4. **Smooth location**: County centroid lat/lon + polynomial terms (time-invariant)
-5. **NHGIS variables**: Fertilizer, wheat, ag diversity, religion, farm Gini, slaves (time-varying by year)
-6. **IPUMS full-count** (usa_00006): TNI, ICM, farmer share, SFT, BPD — computed via DuckDB on 17 GB parquet, joined by `GISJOIN = G + STATEFIP + 0 + COUNTYICP/10 + 0`
-7. **LNI**: From IPUMS 1% samples (usa_00002), 1850-1930, same GISJOIN mapping
+1. **County skeleton**: NHGIS 1940 shapefile (3,108 counties) × 9 decades
+2. **SHI**: STATSGO2 polygons → area-share HHI per county (time-invariant)
+3. **Geo-climatic**: HydroSHEDS + WorldClim zonal stats (time-invariant)
+4. **NHGIS variables**: Agriculture, religion, population census (time-varying)
+5. **IPUMS full count** (usa_00006, 664M rows): DuckDB queries → TNI, ICM, farmer share, SFT, BPD
+6. **LNI**: IPUMS 1% samples (usa_00002), 870k children, 1850-1930
+7. **County join**: `GISJOIN = G + STATEFIP(2) + 0 + COUNTYICP/10(3) + 0`
 
 ---
 
-## What we could not replicate
+## What's not yet done
 
-| What | Why |
-|---|---|
-| LNI for 1940 | IPUMS contractual restriction on names in full count and 1940 1% sample |
-| Exact SHI values | We use area-share HHI; paper uses raster neighbor dissimilarity (see `docs/shi_construction.md` for the exact method) |
-| Learning potential index (Table 5) | Author-constructed index; not yet available from public sources |
-| Census Linking regression (Tables 2, 4, 6) | HISTID + crosswalks ready; linked DiD regression not yet implemented |
+| What | Status | Why |
+|---|---|---|
+| Table 2 Panel A linked regression | Data ready, regression pending | Requires Census Linking DiD (individual-level) |
+| Tables 4, 6 linked regressions | Data ready, regression pending | Same |
+| LNI for 1940 | Cannot do | IPUMS contractual restriction |
+| Exact raster SHI | Ryan working on it | Compute-intensive (500m grid) |
+| Learning potential index | Jiayi looking for it | Author-constructed index |
 
 ---
 
-## Additional data from teammates
+## Teammate contributions
 
 | File | From | Description |
 |---|---|---|
-| `FertilizerData_Jiayi.csv` | Jiayi | Regression-ready data (76 cols) with all SHI variants, controls, grid clusters |
-| `WheatShareData_Jiayi.csv` | Jiayi | Regression-ready Table 5 Panel B (74 cols) |
-| `sustainability_index/` | Jiayi | Crop sustainability indices for 10 crops |
+| `FertilizerData_Jiayi.csv` | Jiayi | Regression-ready (76 cols, all controls + grid clusters) |
+| `WheatShareData_Jiayi.csv` | Jiayi | Regression-ready (74 cols) |
+| `sustainability_index/` | Jiayi | 10 crop sustainability indices |
 | `nhgis0003_ds74_1936_county.csv` | Vicky | 1936 Religious Bodies Census |
 | `docs/` | Jiayi/Vicky | Variable construction guides (TNI, ICM, RHI, SHI, etc.) |
 
@@ -174,41 +155,20 @@ Direction matches. Magnitude attenuated due to 1% sample (measurement error → 
 ```
 ├── README.md
 ├── requirements.txt
-├── notebooks/
-│   └── replication.ipynb               ← main analysis notebook
+├── notebooks/replication.ipynb
 ├── data/
-│   ├── CountyLevelData.parquet (.csv)  ← master panel (38 cols, 1.9 MB)
-│   ├── ipums006_tni (.parquet/.csv)    ← TNI by county-year
-│   ├── ipums006_icm (.parquet/.csv)    ← ICM by county-year
-│   ├── ipums006_farmers (.parquet/.csv)← farmer share (full count)
-│   ├── ipums006_sft (.parquet/.csv)    ← SFT components
-│   ├── ipums006_bpd (.parquet/.csv)    ← BPD (full count)
-│   ├── LNI_by_county (.parquet/.csv)   ← LNI (1% sample)
-│   ├── FertilizerData_Jiayi.csv        ← Jiayi's regression-ready (76 cols)
-│   ├── WheatShareData_Jiayi.csv        ← Jiayi's regression-ready (74 cols)
-│   ├── sustainability_index/           ← crop sustainability rasters
-│   └── [other processed CSVs + parquets]
-├── analysis/                           ← standalone regression scripts
-├── figures/                            ← pre-rendered plots
-└── docs/                              ← variable construction guides
-    ├── TNI_indicator_construction_EN.md
-    ├── ICM_indicator_construction_EN.md
-    ├── RHI_indicator_construction_EN.md
-    ├── shi_construction.md
-    ├── agri_suitability_construction.md
-    ├── learning_potential_data_construction.md
-    └── Replication-stepbystep_updated.docx
+│   ├── CountyLevelData.parquet (.csv)
+│   ├── FertilizerData_Jiayi.csv          ← regression-ready (76 cols)
+│   ├── WheatShareData_Jiayi.csv          ← regression-ready (74 cols)
+│   ├── ipums006_*.parquet (.csv)          ← TNI, ICM, farmers, SFT, BPD
+│   ├── LNI_by_county.parquet (.csv)
+│   ├── sustainability_index/
+│   └── [other CSVs + parquets]
+├── analysis/
+├── figures/
+│   ├── figure1_shi_map.png
+│   ├── table5_updated_results.txt
+│   ├── table2_panels_results.txt
+│   └── ...
+└── docs/                                  ← variable construction guides
 ```
-
-All Parquet files have matching CSVs. Parquet is smaller and faster; CSV works in Excel/R/Stata.
-
----
-
-## Building from scratch
-
-Processing scripts in `data_collection/scripts/` (numbered 01-24):
-- Scripts 01-13: NHGIS + STATSGO2 + HydroSHEDS + WorldClim → county-level controls
-- Script 19: IPUMS 1% sample → LNI
-- Script 22: IPUMS full count (usa_00006) → parquet conversion
-- Script 23: DuckDB queries → TNI, ICM, farmer share, SFT, BPD
-- Script 24: Final merge → CountyLevelData
