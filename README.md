@@ -31,11 +31,11 @@ All regressions use state FE + geo-climatic controls unless noted otherwise. Sta
 
 ### Table 1 — SHI → Community outcomes (cross-sectional with full controls)
 
-Controls include sustainability indices (10 crops) + higher-order controls (SD of temperature, precipitation, slope, elevation, flow accumulation).
+Controls include sustainability indices + higher-order controls (SDs). RHI uses all 7 available years (1850, 1860, 1870, 1890, 1906, 1916, 1926).
 
 | Panel | Outcome | SHI coef | p-value | n | Paper expects | Match? |
 |---|---|---|---|---|---|---|
-| **B** | RHI (religious homogeneity) | **−0.122***  | 0.000 | 5,143 | negative | **yes** |
+| **B** | RHI (religious homogeneity) | **−0.062***  | 0.000 | **16,682** | negative | **yes** |
 | **B** | ICM (marriage homogeneity) | −0.007 | 0.544 | 6,835 | negative | direction yes, not sig. |
 | **C** | TNI (tight norms) | +0.728*** | 0.000 | 3,438 | negative | **no** (note 1) |
 
